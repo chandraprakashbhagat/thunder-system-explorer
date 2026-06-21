@@ -6,6 +6,7 @@ import {
   Clipboard,
   File,
   Folder,
+  FolderSearch,
   FolderOpen,
   Loader2,
   Search,
@@ -138,7 +139,7 @@ export function FileManager({
         {loading ? (
           <div className="space-y-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <Skeleton key={index} className="h-12 w-full" />
+              <Skeleton key={index} className="h-14 w-full rounded-lg" />
             ))}
           </div>
         ) : (
@@ -221,9 +222,19 @@ export function FileManager({
                 <TableRow>
                   <TableCell
                     colSpan={5}
-                    className="h-28 text-center text-muted-foreground"
+                    className="py-8 text-center text-muted-foreground"
                   >
-                    No files match the current filter.
+                    <div className="empty-state">
+                      <div className="space-y-2">
+                        <FolderSearch className="mx-auto h-5 w-5 text-primary" />
+                        <p className="text-sm font-medium text-foreground">
+                          No files found
+                        </p>
+                        <p className="text-xs">
+                          Adjust the search term or move up a directory.
+                        </p>
+                      </div>
+                    </div>
                   </TableCell>
                 </TableRow>
               )}

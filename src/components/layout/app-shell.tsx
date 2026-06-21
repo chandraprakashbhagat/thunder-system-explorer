@@ -15,14 +15,17 @@ export function AppShell({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Sidebar className="hidden lg:flex" onNavigate={() => setMobileOpen(false)} />
+    <div className="premium-shell min-h-screen text-foreground">
+      <Sidebar
+        className="hidden lg:flex"
+        onNavigate={() => setMobileOpen(false)}
+      />
 
       {mobileOpen ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
             type="button"
-            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-background/75 backdrop-blur-md"
             aria-label="Close navigation"
             onClick={() => setMobileOpen(false)}
           />
@@ -35,7 +38,9 @@ export function AppShell({
 
       <div className="lg:pl-72">
         <Topbar system={system} onMenuClick={() => setMobileOpen(true)} />
-        <main className="px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+        <main className="px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1600px]">{children}</div>
+        </main>
       </div>
     </div>
   );

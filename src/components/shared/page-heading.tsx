@@ -10,14 +10,14 @@ export function PageHeading({
   title: string;
 }) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="animate-page-in flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-3xl space-y-2">
         {eyebrow ? (
           <p className="text-xs font-medium uppercase tracking-wide text-primary">
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="gradient-text text-3xl font-semibold tracking-tight sm:text-4xl">
           {title}
         </h1>
         {description ? (

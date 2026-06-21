@@ -115,12 +115,12 @@ export default async function SystemInformationPage() {
             <CardDescription>Starter probes for key app surfaces.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            {system.services.map((service) => (
-              <div
-                key={service.name}
-                className="flex items-center justify-between text-sm"
-              >
-                <span>{service.name}</span>
+              {system.services.map((service) => (
+                <div
+                  key={service.name}
+                  className="surface-row flex items-center justify-between rounded-md px-3 py-2 text-sm"
+                >
+                  <span>{service.name}</span>
                 <Badge
                   variant={service.status === "online" ? "success" : "warning"}
                 >
@@ -145,7 +145,7 @@ export default async function SystemInformationPage() {
               {group.rows.map(([label, value], index) => (
                 <div key={label}>
                   {index > 0 ? <Separator className="mb-4" /> : null}
-                  <div className="grid gap-1">
+                  <div className="surface-row grid gap-1 rounded-md p-3">
                     <span className="text-xs uppercase text-muted-foreground">
                       {label}
                     </span>

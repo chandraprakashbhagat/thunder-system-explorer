@@ -129,7 +129,7 @@ export function SettingsForm() {
             </div>
           </div>
           <Separator />
-          <label className="flex items-start justify-between gap-4 rounded-md border bg-secondary/30 p-4">
+          <label className="surface-row flex items-start justify-between gap-4 rounded-md p-4">
             <span>
               <span className="block text-sm font-medium">
                 Mask environment values
@@ -147,7 +147,7 @@ export function SettingsForm() {
               className="mt-1 h-4 w-4 accent-primary"
             />
           </label>
-          <label className="flex items-start justify-between gap-4 rounded-md border bg-secondary/30 p-4">
+          <label className="surface-row flex items-start justify-between gap-4 rounded-md p-4">
             <span>
               <span className="block text-sm font-medium">
                 Enable telemetry sampling

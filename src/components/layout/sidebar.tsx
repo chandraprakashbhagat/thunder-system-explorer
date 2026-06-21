@@ -66,12 +66,12 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 w-72 flex-col border-r bg-card/95 shadow-sm backdrop-blur",
+        "premium-sidebar fixed inset-y-0 left-0 z-40 w-72 flex-col border-r border-border/70 bg-card/75 backdrop-blur-2xl",
         className,
       )}
     >
-      <div className="flex h-16 items-center gap-3 border-b px-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+      <div className="gradient-border flex h-16 items-center gap-3 border-b border-border/70 px-5">
+        <div className="metric-icon flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
           <Zap className="h-5 w-5" />
         </div>
         <div className="min-w-0">
@@ -94,20 +94,20 @@ export function Sidebar({
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "flex min-h-10 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-accent hover:text-accent-foreground",
+                "group flex min-h-10 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:translate-x-1 hover:bg-accent/80 hover:text-accent-foreground",
                 active &&
-                  "bg-accent text-accent-foreground shadow-sm ring-1 ring-border",
+                  "bg-accent/80 text-accent-foreground shadow-sm ring-1 ring-primary/20",
               )}
             >
-              <item.icon className="h-4 w-4 shrink-0" />
+              <item.icon className="h-4 w-4 shrink-0 transition-colors group-hover:text-primary" />
               <span className="truncate">{item.title}</span>
             </Link>
           );
         })}
       </nav>
 
-      <div className="border-t p-4">
-        <div className="rounded-md border bg-secondary/40 p-3">
+      <div className="border-t border-border/70 p-4">
+        <div className="rounded-md border border-border/70 bg-secondary/40 p-3 shadow-inner">
           <p className="text-xs font-medium uppercase text-muted-foreground">
             Explorer mode
           </p>

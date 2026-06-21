@@ -13,6 +13,7 @@ export function PageSkeleton() {
           <Skeleton key={index} className="h-36 rounded-lg" />
         ))}
       </div>
+      <Skeleton className="h-80 rounded-lg" />
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <Skeleton className="h-80 rounded-lg" />
         <Skeleton className="h-80 rounded-lg" />

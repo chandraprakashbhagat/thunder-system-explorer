@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { ListFilter, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -70,7 +70,7 @@ export function AuditLogTable({ logs }: { logs: AuditLog[] }) {
               onChange={(event) =>
                 setStatus(event.target.value as (typeof statusOptions)[number])
               }
-              className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background focus:ring-2 focus:ring-ring"
+              className="h-10 rounded-md border border-input bg-background/70 px-3 text-sm capitalize shadow-sm outline-none ring-offset-background backdrop-blur transition-all focus:border-primary/50 focus:ring-2 focus:ring-ring"
               aria-label="Filter by status"
             >
               {statusOptions.map((option) => (
@@ -128,9 +128,19 @@ export function AuditLogTable({ logs }: { logs: AuditLog[] }) {
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="h-28 text-center text-muted-foreground"
+                  className="py-8 text-center text-muted-foreground"
                 >
-                  No audit events match the current filters.
+                  <div className="empty-state">
+                    <div className="space-y-2">
+                      <ListFilter className="mx-auto h-5 w-5 text-primary" />
+                      <p className="text-sm font-medium text-foreground">
+                        No audit events found
+                      </p>
+                      <p className="text-xs">
+                        Broaden the search term or status filter.
+                      </p>
+                    </div>
+                  </div>
                 </TableCell>
               </TableRow>
             )}

@@ -58,19 +58,19 @@
 }
 
 .dark {
-  --background: oklch(0.12 0.014 253);
+  --background: oklch(0.105 0.016 253);
   --foreground: oklch(0.96 0.005 247);
-  --card: oklch(0.16 0.016 253);
+  --card: oklch(0.17 0.018 253);
   --card-foreground: oklch(0.96 0.005 247);
   --popover: oklch(0.16 0.016 253);
   --popover-foreground: oklch(0.96 0.005 247);
   --primary: oklch(0.72 0.18 162);
   --primary-foreground: oklch(0.1 0.014 253);
-  --secondary: oklch(0.21 0.016 253);
+  --secondary: oklch(0.21 0.019 253);
   --secondary-foreground: oklch(0.96 0.005 247);
-  --muted: oklch(0.23 0.015 253);
-  --muted-foreground: oklch(0.68 0.018 247);
-  --accent: oklch(0.23 0.035 210);
+  --muted: oklch(0.23 0.017 253);
+  --muted-foreground: oklch(0.72 0.02 247);
+  --accent: oklch(0.24 0.04 210);
   --accent-foreground: oklch(0.96 0.005 247);
   --destructive: oklch(0.58 0.2 25);
   --destructive-foreground: oklch(0.98 0 0);
@@ -87,8 +87,259 @@
 
 body {
   @apply min-h-screen bg-background text-foreground antialiased;
+  background:
+    linear-gradient(120deg, oklch(0.12 0.025 253), oklch(0.09 0.016 253) 44%, oklch(0.11 0.023 178)),
+    var(--background);
 }
 
 ::selection {
   background: color-mix(in oklch, var(--primary) 35%, transparent);
+}
+
+@keyframes gradient-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+.premium-shell {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  background:
+    linear-gradient(115deg, color-mix(in oklch, var(--primary) 12%, transparent), transparent 28%),
+    linear-gradient(245deg, color-mix(in oklch, var(--warning) 9%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in oklch, var(--background) 82%, black), var(--background));
+}
+
+.premium-shell::before {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(100deg, transparent 0%, color-mix(in oklch, var(--primary) 13%, transparent) 18%, transparent 36%),
+    linear-gradient(140deg, transparent 42%, color-mix(in oklch, var(--accent) 28%, transparent) 58%, transparent 74%),
+    linear-gradient(90deg, color-mix(in oklch, var(--background) 95%, transparent), transparent, color-mix(in oklch, var(--background) 90%, transparent));
+  background-size: 220% 220%;
+  opacity: 0.75;
+  animation: gradient-drift 18s ease-in-out infinite;
+}
+
+.premium-shell::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+  opacity: 0.22;
+}
+
+.animate-page-in {
+  animation: page-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.glass-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--card) 92%, white 4%), color-mix(in oklch, var(--card) 88%, transparent)),
+    color-mix(in oklch, var(--card) 88%, transparent);
+  border-color: color-mix(in oklch, var(--border) 74%, white 8%);
+  box-shadow:
+    0 20px 60px color-mix(in oklch, black 30%, transparent),
+    inset 0 1px 0 color-mix(in oklch, white 12%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.glass-panel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(120deg, color-mix(in oklch, white 10%, transparent), transparent 36%);
+  opacity: 0.42;
+}
+
+.interactive-card {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.interactive-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  box-shadow:
+    0 24px 70px color-mix(in oklch, black 36%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 16%, transparent),
+    inset 0 1px 0 color-mix(in oklch, white 14%, transparent);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--foreground), color-mix(in oklch, var(--primary) 85%, white), color-mix(in oklch, var(--warning) 70%, white));
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--primary) 78%, transparent), color-mix(in oklch, var(--warning) 62%, transparent), transparent);
+}
+
+.metric-icon {
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--primary) 22%, transparent),
+    0 10px 28px color-mix(in oklch, var(--primary) 16%, transparent);
+}
+
+.premium-sidebar {
+  box-shadow: 16px 0 70px color-mix(in oklch, black 28%, transparent);
+}
+
+.button-glow {
+  box-shadow: 0 12px 36px color-mix(in oklch, var(--primary) 24%, transparent);
+}
+
+.button-glow:hover {
+  box-shadow: 0 18px 44px color-mix(in oklch, var(--primary) 32%, transparent);
+}
+
+.status-success {
+  box-shadow: 0 0 24px color-mix(in oklch, var(--success) 14%, transparent);
+}
+
+.status-warning {
+  box-shadow: 0 0 24px color-mix(in oklch, var(--warning) 14%, transparent);
+}
+
+.surface-row {
+  border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+  background: color-mix(in oklch, var(--secondary) 46%, transparent);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.surface-row:hover {
+  transform: translateX(2px);
+  border-color: color-mix(in oklch, var(--primary) 34%, var(--border));
+  background: color-mix(in oklch, var(--accent) 58%, transparent);
+}
+
+.status-dot {
+  position: relative;
+  display: inline-flex;
+  height: 0.45rem;
+  width: 0.45rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.status-dot::after {
+  position: absolute;
+  inset: -3px;
+  content: "";
+  border-radius: inherit;
+  border: 1px solid currentColor;
+  animation: pulse-ring 1.8s ease-in-out infinite;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 9rem;
+  place-items: center;
+  border: 1px dashed color-mix(in oklch, var(--border) 85%, white 8%);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--secondary) 44%, transparent), transparent),
+    color-mix(in oklch, var(--card) 48%, transparent);
+}
+
+.chart-grid {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.shimmer-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-surface::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, white 8%, transparent), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2.3s infinite;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--muted-foreground) 42%, transparent);
+  background-clip: content-box;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, Clipboard, Search } from "lucide-react";
+import { Check, Clipboard, Search, SearchX } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -119,9 +119,19 @@ export function EnvironmentTable({
               <TableRow>
                 <TableCell
                   colSpan={4}
-                  className="h-28 text-center text-muted-foreground"
+                  className="py-8 text-center text-muted-foreground"
                 >
-                  No variables match the current filter.
+                  <div className="empty-state">
+                    <div className="space-y-2">
+                      <SearchX className="mx-auto h-5 w-5 text-primary" />
+                      <p className="text-sm font-medium text-foreground">
+                        No variables found
+                      </p>
+                      <p className="text-xs">
+                        Try a different key, category, or masked value.
+                      </p>
+                    </div>
+                  </div>
                 </TableCell>
               </TableRow>
             )}
